@@ -18,12 +18,13 @@ use {ffi, ChannelRef, ChannelMut};
 pub struct Handle(ffi::ws2811_t);
 
 impl Handle {
-	pub unsafe fn new(mut value: ffi::ws2811_t) -> Result<Self, ()> {
-		if ffi::ws2811_init(&mut value) >= 0 {
+	pub unsafe fn new(mut value: ffi::ws2811_t) -> Result<Self, i32> {
+        let ret = ffi::ws2811_init(&mut value);
+		if ret >= 0 {
 			Ok(Handle(value))
 		}
 		else {
-			Err(())
+			Err(ret)
 		}
 	}
 

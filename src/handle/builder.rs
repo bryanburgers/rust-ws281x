@@ -46,7 +46,7 @@ impl Builder {
 		self
 	}
 
-	pub fn build(&mut self) -> Result<Handle, ()> {
+	pub fn build(&mut self) -> Result<Handle, i32> {
 		unsafe {
 			Handle::new(ptr::read(&self.0))
 		}
